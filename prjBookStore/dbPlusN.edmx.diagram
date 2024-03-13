@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e463cfa5ecc44216b7bae4b578bc32cc" Name="Diagram1">
+        <EntityTypeShape EntityType="dbPlusNModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tAuthor" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tBook" Width="1.5" PointX="13.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCatagory" Width="1.5" PointX="15.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCategory" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCompany" Width="1.5" PointX="2.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCustomerLevel" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCustomerLike" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCustomerService" Width="1.5" PointX="10.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCustomerWatchList" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tDepartments" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tDiscount" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tEmployee" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tEvent" Width="1.5" PointX="8.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tExpenseCategories" Width="1.5" PointX="10.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tExpenseItems" Width="1.5" PointX="12.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tExpenseReports" Width="1.5" PointX="10.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tFundrasing" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tFundrasingPlan" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tMember" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tMerchandise" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tOrders" Width="1.5" PointX="7.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tPosition" Width="1.5" PointX="6" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tProblem" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tProducts" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPlusNModel.tCard" Width="1.5" PointX="10.5" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="dbPlusNModel.FK_tBook_tCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tBook_tProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerLike_tCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tMerchandise_tCategory1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerLevel_tMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerLike_tMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerService_tEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerService_tMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerService_tProblem" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCustomerWatchList_tProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_t關注清單_tMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tEmployee_tDepartments" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tDiscount_tEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tCard_tEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tEmployee_tPosition" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tExpenseReports_tEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tExpenseReports_tEmployee1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tExpenseItems_tExpenseCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tExpenseItems_tExpenseReports" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tFundrasingPlan_tFundrasing" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tOrders_tMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.FK_tMerchandise_tProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.tBookCatagory" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.tCategoryDiscount" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPlusNModel.tMemberFundrasingPlan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

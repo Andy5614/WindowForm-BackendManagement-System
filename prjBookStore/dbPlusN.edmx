@@ -1,0 +1,1888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbPlusNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tAuthor">
+          <Key>
+            <PropertyRef Name="fAuthorID" />
+          </Key>
+          <Property Name="fAuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fAuthorName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fAuthorPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAuthorEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAuthorAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAuthorGender" Type="nvarchar" MaxLength="10" />
+          <Property Name="fAuthorNationality" Type="nvarchar" MaxLength="20" />
+          <Property Name="fAuthorImagePath" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tBook">
+          <Key>
+            <PropertyRef Name="fIsbn" />
+          </Key>
+          <Property Name="fIsbn" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="fLanguage" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPublisher" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPublishDate" Type="date" />
+          <Property Name="fEdition" Type="nvarchar" MaxLength="10" />
+          <Property Name="fPublishRegion" Type="nvarchar" MaxLength="15" />
+          <Property Name="fCover" Type="nvarchar" MaxLength="10" />
+          <Property Name="fPage" Type="int" />
+          <Property Name="fBookImagePath" Type="nvarchar" MaxLength="50" />
+          <Property Name="fBookRating" Type="int" />
+          <Property Name="fLevel" Type="nvarchar" MaxLength="15" />
+          <Property Name="fType" Type="nvarchar" MaxLength="15" />
+          <Property Name="fBookCategoryId" Type="int" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'dbPlusN.dbo.tBookCatagory' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="tBookCatagory">
+          <Key>
+            <PropertyRef Name="fIsbn" />
+            <PropertyRef Name="fBookCatagoryId" />
+          </Key>
+          <Property Name="fIsbn" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fBookCatagoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'dbPlusN.dbo.tCard' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="tCard">
+          <Key>
+            <PropertyRef Name="fEmployeeId" />
+          </Key>
+          <Property Name="fEmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fStart" Type="smalldatetime" />
+          <Property Name="fOff" Type="smalldatetime" />
+          <Property Name="fWorktime" Type="int" />
+        </EntityType>
+        <EntityType Name="tCatagory">
+          <Key>
+            <PropertyRef Name="fBookCatagoryId" />
+          </Key>
+          <Property Name="fBookCatagoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCatagory" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="fCategoryID" />
+          </Key>
+          <Property Name="fCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'dbPlusN.dbo.tCategoryDiscount' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="tCategoryDiscount">
+          <Key>
+            <PropertyRef Name="fCategoryID" />
+            <PropertyRef Name="fDiscountID" />
+          </Key>
+          <Property Name="fCategoryID" Type="int" Nullable="false" />
+          <Property Name="fDiscountID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCompany">
+          <Key>
+            <PropertyRef Name="fCompanyId" />
+          </Key>
+          <Property Name="fCompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCompanyName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tCustomerLevel">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerId" Type="int" Nullable="false" />
+          <Property Name="fTotalSpending" Type="money" />
+          <Property Name="fCustomerLevel" Type="int" />
+          <Property Name="fDiscount" Type="float" />
+        </EntityType>
+        <EntityType Name="tCustomerLike">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerId" Type="int" Nullable="false" />
+          <Property Name="fCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="tCustomerService">
+          <Key>
+            <PropertyRef Name="tCustomerServiceID" />
+          </Key>
+          <Property Name="tCustomerServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fProblemId" Type="int" />
+          <Property Name="fType" Type="nvarchar" MaxLength="50" />
+          <Property Name="fContent" Type="nchar" MaxLength="500" />
+          <Property Name="fParentId" Type="int" />
+          <Property Name="fMemberID" Type="int" />
+        </EntityType>
+        <EntityType Name="tCustomerWatchList">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerId" Type="int" Nullable="false" />
+          <Property Name="fProductBarcode" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tDepartments">
+          <Key>
+            <PropertyRef Name="fDepartmentId" />
+          </Key>
+          <Property Name="fDepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fDepartmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fManagerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tDiscount">
+          <Key>
+            <PropertyRef Name="fDiscountID" />
+          </Key>
+          <Property Name="fDiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fDiscountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fDiscountPercentage" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="fEventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeId" />
+          </Key>
+          <Property Name="fEmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="fDepartmentId" Type="int" />
+          <Property Name="fPositionId" Type="int" />
+          <Property Name="fWage" Type="money" />
+          <Property Name="fImagePath" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEnable" Type="bit" />
+        </EntityType>
+        <EntityType Name="tEvent">
+          <Key>
+            <PropertyRef Name="fEventID" />
+          </Key>
+          <Property Name="fEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEventName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fEventDescription" Type="nvarchar(max)" />
+          <Property Name="fEventType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fStratdate" Type="date" Nullable="false" />
+          <Property Name="fEnddate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tExpenseCategories">
+          <Key>
+            <PropertyRef Name="fCategoryId" />
+          </Key>
+          <Property Name="fCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tExpenseItems">
+          <Key>
+            <PropertyRef Name="fReportItemId" />
+          </Key>
+          <Property Name="fReportItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fReportId" Type="int" Nullable="false" />
+          <Property Name="fCategoryId" Type="int" Nullable="false" />
+          <Property Name="fReportItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fQty" Type="int" />
+          <Property Name="fAmount" Type="money" />
+          <Property Name="fAmountDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tExpenseReports">
+          <Key>
+            <PropertyRef Name="fReportId" />
+          </Key>
+          <Property Name="fReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEmployeeId" Type="int" />
+          <Property Name="fDate" Type="datetime" />
+          <Property Name="fStatus" Type="bit" />
+          <Property Name="fApproverId" Type="int" Nullable="false" />
+          <Property Name="fApprovalDate" Type="datetime" />
+          <Property Name="fTotal" Type="money" />
+        </EntityType>
+        <EntityType Name="tFundrasing">
+          <Key>
+            <PropertyRef Name="fFundrasingID" />
+          </Key>
+          <Property Name="fFundrasingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEventName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fFundrasingGoal" Type="money" Nullable="false" />
+          <Property Name="fCurrentAmount" Type="money" Nullable="false" />
+          <Property Name="fFundraisingDescription" Type="nvarchar(max)" />
+          <Property Name="fStartdate" Type="date" Nullable="false" />
+          <Property Name="fEnddate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tFundrasingPlan">
+          <Key>
+            <PropertyRef Name="fPlanID" />
+          </Key>
+          <Property Name="fPlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fPlanName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fPlanAmount" Type="money" Nullable="false" />
+          <Property Name="fPlanDescription" Type="nvarchar(max)" />
+          <Property Name="fFundrasingID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="fMemberId" />
+          </Key>
+          <Property Name="fMemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="fName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="fBirthday" Type="nvarchar" MaxLength="50" />
+          <Property Name="fCountry" Type="nvarchar" MaxLength="50" />
+          <Property Name="fSex" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'dbPlusN.dbo.tMemberFundrasingPlan' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="tMemberFundrasingPlan">
+          <Key>
+            <PropertyRef Name="fMemberID" />
+            <PropertyRef Name="fPlanID" />
+          </Key>
+          <Property Name="fMemberID" Type="int" Nullable="false" />
+          <Property Name="fPlanID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMerchandise">
+          <Key>
+            <PropertyRef Name="fMerchandiseBarcode" />
+          </Key>
+          <Property Name="fMerchandiseBarcode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fMerchandiseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fMerchandisePath" Type="nvarchar" MaxLength="50" />
+          <Property Name="fMerchandiseRating" Type="int" />
+          <Property Name="fMerchandiseCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="tOrders">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fMemberID" Type="int" />
+          <Property Name="fOrderDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fTransferID" Type="int" />
+          <Property Name="fOrderStatus" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tPosition">
+          <Key>
+            <PropertyRef Name="fPositionId" />
+          </Key>
+          <Property Name="fPositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fPositionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProblem">
+          <Key>
+            <PropertyRef Name="fProblemId" />
+          </Key>
+          <Property Name="fProblemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fProblem" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tProducts">
+          <Key>
+            <PropertyRef Name="fProductBarcode" />
+          </Key>
+          <Property Name="fProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fProductBarcode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fProductCategory" Type="nvarchar" MaxLength="20" />
+          <Property Name="fProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPrice" Type="money" />
+          <Property Name="fCost" Type="money" />
+          <Property Name="fQuantity" Type="int" />
+        </EntityType>
+        <Association Name="FK_tBook_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tBook" Type="Self.tBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tBook">
+              <PropertyRef Name="fBookCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBook_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="1" />
+          <End Role="tBook" Type="Self.tBook" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tBook">
+              <PropertyRef Name="fIsbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBookCatagory_tBook">
+          <End Role="tBook" Type="Self.tBook" Multiplicity="1" />
+          <End Role="tBookCatagory" Type="Self.tBookCatagory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBook">
+              <PropertyRef Name="fIsbn" />
+            </Principal>
+            <Dependent Role="tBookCatagory">
+              <PropertyRef Name="fIsbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBookCatagory_tCatagory">
+          <End Role="tCatagory" Type="Self.tCatagory" Multiplicity="1" />
+          <End Role="tBookCatagory" Type="Self.tBookCatagory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCatagory">
+              <PropertyRef Name="fBookCatagoryId" />
+            </Principal>
+            <Dependent Role="tBookCatagory">
+              <PropertyRef Name="fBookCatagoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCard_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tCard" Type="Self.tCard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tCard">
+              <PropertyRef Name="fEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCategoryDiscount_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="1" />
+          <End Role="tCategoryDiscount" Type="Self.tCategoryDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tCategoryDiscount">
+              <PropertyRef Name="fCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCategoryDiscount_tDiscount">
+          <End Role="tDiscount" Type="Self.tDiscount" Multiplicity="1" />
+          <End Role="tCategoryDiscount" Type="Self.tCategoryDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDiscount">
+              <PropertyRef Name="fDiscountID" />
+            </Principal>
+            <Dependent Role="tCategoryDiscount">
+              <PropertyRef Name="fDiscountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLevel_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerLevel" Type="Self.tCustomerLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerLevel">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLike_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tCustomerLike" Type="Self.tCustomerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tCustomerLike">
+              <PropertyRef Name="fCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLike_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerLike" Type="Self.tCustomerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerLike">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tProblem">
+          <End Role="tProblem" Type="Self.tProblem" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProblem">
+              <PropertyRef Name="fProblemId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fProblemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerWatchList_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="0..1" />
+          <End Role="tCustomerWatchList" Type="Self.tCustomerWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tCustomerWatchList">
+              <PropertyRef Name="fProductBarcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDiscount_tEvent">
+          <End Role="tEvent" Type="Self.tEvent" Multiplicity="1" />
+          <End Role="tDiscount" Type="Self.tDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEvent">
+              <PropertyRef Name="fEventID" />
+            </Principal>
+            <Dependent Role="tDiscount">
+              <PropertyRef Name="fEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartments">
+          <End Role="tDepartments" Type="Self.tDepartments" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartments">
+              <PropertyRef Name="fDepartmentId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tPosition">
+          <End Role="tPosition" Type="Self.tPosition" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPosition">
+              <PropertyRef Name="fPositionId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fPositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseItems_tExpenseCategories">
+          <End Role="tExpenseCategories" Type="Self.tExpenseCategories" Multiplicity="1" />
+          <End Role="tExpenseItems" Type="Self.tExpenseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tExpenseCategories">
+              <PropertyRef Name="fCategoryId" />
+            </Principal>
+            <Dependent Role="tExpenseItems">
+              <PropertyRef Name="fCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseItems_tExpenseReports">
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="1" />
+          <End Role="tExpenseItems" Type="Self.tExpenseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tExpenseReports">
+              <PropertyRef Name="fReportId" />
+            </Principal>
+            <Dependent Role="tExpenseItems">
+              <PropertyRef Name="fReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseReports_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tExpenseReports">
+              <PropertyRef Name="fEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseReports_tEmployee1">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tExpenseReports">
+              <PropertyRef Name="fApproverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tFundrasingPlan_tFundrasing">
+          <End Role="tFundrasing" Type="Self.tFundrasing" Multiplicity="1" />
+          <End Role="tFundrasingPlan" Type="Self.tFundrasingPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFundrasing">
+              <PropertyRef Name="fFundrasingID" />
+            </Principal>
+            <Dependent Role="tFundrasingPlan">
+              <PropertyRef Name="fFundrasingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMemberFundrasingPlan_tFundrasingPlan">
+          <End Role="tFundrasingPlan" Type="Self.tFundrasingPlan" Multiplicity="1" />
+          <End Role="tMemberFundrasingPlan" Type="Self.tMemberFundrasingPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFundrasingPlan">
+              <PropertyRef Name="fPlanID" />
+            </Principal>
+            <Dependent Role="tMemberFundrasingPlan">
+              <PropertyRef Name="fPlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMemberFundrasingPlan_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tMemberFundrasingPlan" Type="Self.tMemberFundrasingPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tMemberFundrasingPlan">
+              <PropertyRef Name="fMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMerchandise_tCategory1">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tMerchandise" Type="Self.tMerchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tMerchandise">
+              <PropertyRef Name="fMerchandiseCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMerchandise_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="1" />
+          <End Role="tMerchandise" Type="Self.tMerchandise" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tMerchandise">
+              <PropertyRef Name="fMerchandiseBarcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t關注清單_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerWatchList" Type="Self.tCustomerWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerWatchList">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbPlusNModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAuthor" EntityType="Self.tAuthor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBook" EntityType="Self.tBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCatagory" EntityType="Self.tCatagory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCategory" EntityType="Self.tCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCompany" EntityType="Self.tCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomerLevel" EntityType="Self.tCustomerLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomerLike" EntityType="Self.tCustomerLike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomerService" EntityType="Self.tCustomerService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomerWatchList" EntityType="Self.tCustomerWatchList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDepartments" EntityType="Self.tDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDiscount" EntityType="Self.tDiscount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEvent" EntityType="Self.tEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tExpenseCategories" EntityType="Self.tExpenseCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tExpenseItems" EntityType="Self.tExpenseItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tExpenseReports" EntityType="Self.tExpenseReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFundrasing" EntityType="Self.tFundrasing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFundrasingPlan" EntityType="Self.tFundrasingPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMerchandise" EntityType="Self.tMerchandise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrders" EntityType="Self.tOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPosition" EntityType="Self.tPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProblem" EntityType="Self.tProblem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProducts" EntityType="Self.tProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBookCatagory" EntityType="Self.tBookCatagory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tBookCatagory].[fIsbn] AS [fIsbn], 
+    [tBookCatagory].[fBookCatagoryId] AS [fBookCatagoryId]
+    FROM [dbo].[tBookCatagory] AS [tBookCatagory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tCard" EntityType="Self.tCard" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tCard].[fEmployeeId] AS [fEmployeeId], 
+    [tCard].[fStart] AS [fStart], 
+    [tCard].[fOff] AS [fOff], 
+    [tCard].[fWorktime] AS [fWorktime]
+    FROM [dbo].[tCard] AS [tCard]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tCategoryDiscount" EntityType="Self.tCategoryDiscount" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tCategoryDiscount].[fCategoryID] AS [fCategoryID], 
+    [tCategoryDiscount].[fDiscountID] AS [fDiscountID]
+    FROM [dbo].[tCategoryDiscount] AS [tCategoryDiscount]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tMemberFundrasingPlan" EntityType="Self.tMemberFundrasingPlan" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tMemberFundrasingPlan].[fMemberID] AS [fMemberID], 
+    [tMemberFundrasingPlan].[fPlanID] AS [fPlanID]
+    FROM [dbo].[tMemberFundrasingPlan] AS [tMemberFundrasingPlan]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tBook_tCategory" Association="Self.FK_tBook_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tBook" EntitySet="tBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBook_tProducts" Association="Self.FK_tBook_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tBook" EntitySet="tBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBookCatagory_tBook" Association="Self.FK_tBookCatagory_tBook">
+            <End Role="tBook" EntitySet="tBook" />
+            <End Role="tBookCatagory" EntitySet="tBookCatagory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBookCatagory_tCatagory" Association="Self.FK_tBookCatagory_tCatagory">
+            <End Role="tCatagory" EntitySet="tCatagory" />
+            <End Role="tBookCatagory" EntitySet="tBookCatagory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCard_tEmployee" Association="Self.FK_tCard_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCard" EntitySet="tCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCategoryDiscount_tCategory" Association="Self.FK_tCategoryDiscount_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tCategoryDiscount" EntitySet="tCategoryDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCategoryDiscount_tDiscount" Association="Self.FK_tCategoryDiscount_tDiscount">
+            <End Role="tDiscount" EntitySet="tDiscount" />
+            <End Role="tCategoryDiscount" EntitySet="tCategoryDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLevel_tMember" Association="Self.FK_tCustomerLevel_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerLevel" EntitySet="tCustomerLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLike_tCategory" Association="Self.FK_tCustomerLike_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tCustomerLike" EntitySet="tCustomerLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLike_tMember" Association="Self.FK_tCustomerLike_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerLike" EntitySet="tCustomerLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tEmployee" Association="Self.FK_tCustomerService_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tMember" Association="Self.FK_tCustomerService_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tProblem" Association="Self.FK_tCustomerService_tProblem">
+            <End Role="tProblem" EntitySet="tProblem" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerWatchList_tProducts" Association="Self.FK_tCustomerWatchList_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tCustomerWatchList" EntitySet="tCustomerWatchList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDiscount_tEvent" Association="Self.FK_tDiscount_tEvent">
+            <End Role="tEvent" EntitySet="tEvent" />
+            <End Role="tDiscount" EntitySet="tDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartments" Association="Self.FK_tEmployee_tDepartments">
+            <End Role="tDepartments" EntitySet="tDepartments" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tPosition" Association="Self.FK_tEmployee_tPosition">
+            <End Role="tPosition" EntitySet="tPosition" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseItems_tExpenseCategories" Association="Self.FK_tExpenseItems_tExpenseCategories">
+            <End Role="tExpenseCategories" EntitySet="tExpenseCategories" />
+            <End Role="tExpenseItems" EntitySet="tExpenseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseItems_tExpenseReports" Association="Self.FK_tExpenseItems_tExpenseReports">
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+            <End Role="tExpenseItems" EntitySet="tExpenseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseReports_tEmployee" Association="Self.FK_tExpenseReports_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseReports_tEmployee1" Association="Self.FK_tExpenseReports_tEmployee1">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tFundrasingPlan_tFundrasing" Association="Self.FK_tFundrasingPlan_tFundrasing">
+            <End Role="tFundrasing" EntitySet="tFundrasing" />
+            <End Role="tFundrasingPlan" EntitySet="tFundrasingPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMemberFundrasingPlan_tFundrasingPlan" Association="Self.FK_tMemberFundrasingPlan_tFundrasingPlan">
+            <End Role="tFundrasingPlan" EntitySet="tFundrasingPlan" />
+            <End Role="tMemberFundrasingPlan" EntitySet="tMemberFundrasingPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMemberFundrasingPlan_tMember" Association="Self.FK_tMemberFundrasingPlan_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tMemberFundrasingPlan" EntitySet="tMemberFundrasingPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMerchandise_tCategory1" Association="Self.FK_tMerchandise_tCategory1">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tMerchandise" EntitySet="tMerchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMerchandise_tProducts" Association="Self.FK_tMerchandise_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tMerchandise" EntitySet="tMerchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tMember" Association="Self.FK_tOrders_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t關注清單_tMember" Association="Self.FK_t關注清單_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerWatchList" EntitySet="tCustomerWatchList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbPlusNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tAuthor">
+          <Key>
+            <PropertyRef Name="fAuthorID" />
+          </Key>
+          <Property Name="fAuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fAuthorName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorNationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fAuthorImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tBook">
+          <Key>
+            <PropertyRef Name="fIsbn" />
+          </Key>
+          <Property Name="fIsbn" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPublisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPublishDate" Type="DateTime" Precision="0" />
+          <Property Name="fEdition" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fPublishRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fCover" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fPage" Type="Int32" />
+          <Property Name="fBookImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fBookRating" Type="Int32" />
+          <Property Name="fLevel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fBookCategoryId" Type="Int32" />
+          <NavigationProperty Name="tCategory" Relationship="Self.FK_tBook_tCategory" FromRole="tBook" ToRole="tCategory" />
+          <NavigationProperty Name="tProducts" Relationship="Self.FK_tBook_tProducts" FromRole="tBook" ToRole="tProducts" />
+          <NavigationProperty Name="tCatagory" Relationship="Self.tBookCatagory" FromRole="tBook" ToRole="tCatagory" />
+        </EntityType>
+        <EntityType Name="tCatagory">
+          <Key>
+            <PropertyRef Name="fBookCatagoryId" />
+          </Key>
+          <Property Name="fBookCatagoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCatagory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tBook" Relationship="Self.tBookCatagory" FromRole="tCatagory" ToRole="tBook" />
+        </EntityType>
+        <EntityType Name="tCategory">
+          <Key>
+            <PropertyRef Name="fCategoryID" />
+          </Key>
+          <Property Name="fCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tBook" Relationship="Self.FK_tBook_tCategory" FromRole="tCategory" ToRole="tBook" />
+          <NavigationProperty Name="tCustomerLike" Relationship="Self.FK_tCustomerLike_tCategory" FromRole="tCategory" ToRole="tCustomerLike" />
+          <NavigationProperty Name="tMerchandise" Relationship="Self.FK_tMerchandise_tCategory1" FromRole="tCategory" ToRole="tMerchandise" />
+          <NavigationProperty Name="tDiscount" Relationship="Self.tCategoryDiscount" FromRole="tCategory" ToRole="tDiscount" />
+        </EntityType>
+        <EntityType Name="tCompany">
+          <Key>
+            <PropertyRef Name="fCompanyId" />
+          </Key>
+          <Property Name="fCompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tCustomerLevel">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerId" Type="Int32" Nullable="false" />
+          <Property Name="fTotalSpending" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fCustomerLevel" Type="Int32" />
+          <Property Name="fDiscount" Type="Double" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_tCustomerLevel_tMember" FromRole="tCustomerLevel" ToRole="tMember" />
+        </EntityType>
+        <EntityType Name="tCustomerLike">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerId" Type="Int32" Nullable="false" />
+          <Property Name="fCategoryId" Type="Int32" />
+          <NavigationProperty Name="tCategory" Relationship="Self.FK_tCustomerLike_tCategory" FromRole="tCustomerLike" ToRole="tCategory" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_tCustomerLike_tMember" FromRole="tCustomerLike" ToRole="tMember" />
+        </EntityType>
+        <EntityType Name="tCustomerService">
+          <Key>
+            <PropertyRef Name="tCustomerServiceID" />
+          </Key>
+          <Property Name="tCustomerServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fProblemId" Type="Int32" />
+          <Property Name="fType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fContent" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="fParentId" Type="Int32" />
+          <Property Name="fMemberID" Type="Int32" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tCustomerService_tEmployee" FromRole="tCustomerService" ToRole="tEmployee" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_tCustomerService_tMember" FromRole="tCustomerService" ToRole="tMember" />
+          <NavigationProperty Name="tProblem" Relationship="Self.FK_tCustomerService_tProblem" FromRole="tCustomerService" ToRole="tProblem" />
+        </EntityType>
+        <EntityType Name="tCustomerWatchList">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerId" Type="Int32" Nullable="false" />
+          <Property Name="fProductBarcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProducts" Relationship="Self.FK_tCustomerWatchList_tProducts" FromRole="tCustomerWatchList" ToRole="tProducts" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_t關注清單_tMember" FromRole="tCustomerWatchList" ToRole="tMember" />
+        </EntityType>
+        <EntityType Name="tDepartments">
+          <Key>
+            <PropertyRef Name="fDepartmentId" />
+          </Key>
+          <Property Name="fDepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fDepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fManagerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tEmployee_tDepartments" FromRole="tDepartments" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tDiscount">
+          <Key>
+            <PropertyRef Name="fDiscountID" />
+          </Key>
+          <Property Name="fDiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fDiscountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fDiscountPercentage" Type="Decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="fEventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tEvent" Relationship="Self.FK_tDiscount_tEvent" FromRole="tDiscount" ToRole="tEvent" />
+          <NavigationProperty Name="tCategory" Relationship="Self.tCategoryDiscount" FromRole="tDiscount" ToRole="tCategory" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeId" />
+          </Key>
+          <Property Name="fEmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fDepartmentId" Type="Int32" />
+          <Property Name="fPositionId" Type="Int32" />
+          <Property Name="fWage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEnable" Type="Boolean" />
+          <NavigationProperty Name="tCustomerService" Relationship="Self.FK_tCustomerService_tEmployee" FromRole="tEmployee" ToRole="tCustomerService" />
+          <NavigationProperty Name="tDepartments" Relationship="Self.FK_tEmployee_tDepartments" FromRole="tEmployee" ToRole="tDepartments" />
+          <NavigationProperty Name="tCard" Relationship="Self.FK_tCard_tEmployee" FromRole="tEmployee" ToRole="tCard" />
+          <NavigationProperty Name="tPosition" Relationship="Self.FK_tEmployee_tPosition" FromRole="tEmployee" ToRole="tPosition" />
+          <NavigationProperty Name="tExpenseReports" Relationship="Self.FK_tExpenseReports_tEmployee" FromRole="tEmployee" ToRole="tExpenseReports" />
+          <NavigationProperty Name="tExpenseReports1" Relationship="Self.FK_tExpenseReports_tEmployee1" FromRole="tEmployee" ToRole="tExpenseReports" />
+        </EntityType>
+        <EntityType Name="tEvent">
+          <Key>
+            <PropertyRef Name="fEventID" />
+          </Key>
+          <Property Name="fEventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fEventDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fEventType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fStratdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fEnddate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tDiscount" Relationship="Self.FK_tDiscount_tEvent" FromRole="tEvent" ToRole="tDiscount" />
+        </EntityType>
+        <EntityType Name="tExpenseCategories">
+          <Key>
+            <PropertyRef Name="fCategoryId" />
+          </Key>
+          <Property Name="fCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tExpenseItems" Relationship="Self.FK_tExpenseItems_tExpenseCategories" FromRole="tExpenseCategories" ToRole="tExpenseItems" />
+        </EntityType>
+        <EntityType Name="tExpenseItems">
+          <Key>
+            <PropertyRef Name="fReportItemId" />
+          </Key>
+          <Property Name="fReportItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fReportId" Type="Int32" Nullable="false" />
+          <Property Name="fCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="fReportItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fQty" Type="Int32" />
+          <Property Name="fAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fAmountDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tExpenseCategories" Relationship="Self.FK_tExpenseItems_tExpenseCategories" FromRole="tExpenseItems" ToRole="tExpenseCategories" />
+          <NavigationProperty Name="tExpenseReports" Relationship="Self.FK_tExpenseItems_tExpenseReports" FromRole="tExpenseItems" ToRole="tExpenseReports" />
+        </EntityType>
+        <EntityType Name="tExpenseReports">
+          <Key>
+            <PropertyRef Name="fReportId" />
+          </Key>
+          <Property Name="fReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEmployeeId" Type="Int32" />
+          <Property Name="fDate" Type="DateTime" Precision="3" />
+          <Property Name="fStatus" Type="Boolean" />
+          <Property Name="fApproverId" Type="Int32" Nullable="false" />
+          <Property Name="fApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="fTotal" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tExpenseReports_tEmployee" FromRole="tExpenseReports" ToRole="tEmployee" />
+          <NavigationProperty Name="tEmployee1" Relationship="Self.FK_tExpenseReports_tEmployee1" FromRole="tExpenseReports" ToRole="tEmployee" />
+          <NavigationProperty Name="tExpenseItems" Relationship="Self.FK_tExpenseItems_tExpenseReports" FromRole="tExpenseReports" ToRole="tExpenseItems" />
+        </EntityType>
+        <EntityType Name="tFundrasing">
+          <Key>
+            <PropertyRef Name="fFundrasingID" />
+          </Key>
+          <Property Name="fFundrasingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fFundrasingGoal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fCurrentAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fFundraisingDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fStartdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fEnddate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tFundrasingPlan" Relationship="Self.FK_tFundrasingPlan_tFundrasing" FromRole="tFundrasing" ToRole="tFundrasingPlan" />
+        </EntityType>
+        <EntityType Name="tFundrasingPlan">
+          <Key>
+            <PropertyRef Name="fPlanID" />
+          </Key>
+          <Property Name="fPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fPlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fPlanAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fPlanDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fFundrasingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tFundrasing" Relationship="Self.FK_tFundrasingPlan_tFundrasing" FromRole="tFundrasingPlan" ToRole="tFundrasing" />
+          <NavigationProperty Name="tMember" Relationship="Self.tMemberFundrasingPlan" FromRole="tFundrasingPlan" ToRole="tMember" />
+        </EntityType>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="fMemberId" />
+          </Key>
+          <Property Name="fMemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fBirthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fSex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCustomerLevel" Relationship="Self.FK_tCustomerLevel_tMember" FromRole="tMember" ToRole="tCustomerLevel" />
+          <NavigationProperty Name="tCustomerLike" Relationship="Self.FK_tCustomerLike_tMember" FromRole="tMember" ToRole="tCustomerLike" />
+          <NavigationProperty Name="tCustomerService" Relationship="Self.FK_tCustomerService_tMember" FromRole="tMember" ToRole="tCustomerService" />
+          <NavigationProperty Name="tCustomerWatchList" Relationship="Self.FK_t關注清單_tMember" FromRole="tMember" ToRole="tCustomerWatchList" />
+          <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrders_tMember" FromRole="tMember" ToRole="tOrders" />
+          <NavigationProperty Name="tFundrasingPlan" Relationship="Self.tMemberFundrasingPlan" FromRole="tMember" ToRole="tFundrasingPlan" />
+        </EntityType>
+        <EntityType Name="tMerchandise">
+          <Key>
+            <PropertyRef Name="fMerchandiseBarcode" />
+          </Key>
+          <Property Name="fMerchandiseBarcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fMerchandiseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fMerchandisePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fMerchandiseRating" Type="Int32" />
+          <Property Name="fMerchandiseCategoryId" Type="Int32" />
+          <NavigationProperty Name="tCategory" Relationship="Self.FK_tMerchandise_tCategory1" FromRole="tMerchandise" ToRole="tCategory" />
+          <NavigationProperty Name="tProducts" Relationship="Self.FK_tMerchandise_tProducts" FromRole="tMerchandise" ToRole="tProducts" />
+        </EntityType>
+        <EntityType Name="tOrders">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fMemberID" Type="Int32" />
+          <Property Name="fOrderDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fTransferID" Type="Int32" />
+          <Property Name="fOrderStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_tOrders_tMember" FromRole="tOrders" ToRole="tMember" />
+        </EntityType>
+        <EntityType Name="tPosition">
+          <Key>
+            <PropertyRef Name="fPositionId" />
+          </Key>
+          <Property Name="fPositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fPositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tEmployee_tPosition" FromRole="tPosition" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tProblem">
+          <Key>
+            <PropertyRef Name="fProblemId" />
+          </Key>
+          <Property Name="fProblemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fProblem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCustomerService" Relationship="Self.FK_tCustomerService_tProblem" FromRole="tProblem" ToRole="tCustomerService" />
+        </EntityType>
+        <EntityType Name="tProducts">
+          <Key>
+            <PropertyRef Name="fProductBarcode" />
+          </Key>
+          <Property Name="fProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fProductBarcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fProductCategory" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fQuantity" Type="Int32" />
+          <NavigationProperty Name="tBook" Relationship="Self.FK_tBook_tProducts" FromRole="tProducts" ToRole="tBook" />
+          <NavigationProperty Name="tCustomerWatchList" Relationship="Self.FK_tCustomerWatchList_tProducts" FromRole="tProducts" ToRole="tCustomerWatchList" />
+          <NavigationProperty Name="tMerchandise" Relationship="Self.FK_tMerchandise_tProducts" FromRole="tProducts" ToRole="tMerchandise" />
+        </EntityType>
+        <EntityType Name="tCard">
+          <Key>
+            <PropertyRef Name="fEmployeeId" />
+          </Key>
+          <Property Name="fEmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fStart" Type="DateTime" Precision="0" />
+          <Property Name="fOff" Type="DateTime" Precision="0" />
+          <Property Name="fWorktime" Type="Int32" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tCard_tEmployee" FromRole="tCard" ToRole="tEmployee" />
+        </EntityType>
+        <Association Name="FK_tBook_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tBook" Type="Self.tBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tBook">
+              <PropertyRef Name="fBookCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBook_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="1" />
+          <End Role="tBook" Type="Self.tBook" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tBook">
+              <PropertyRef Name="fIsbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLike_tCategory">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tCustomerLike" Type="Self.tCustomerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tCustomerLike">
+              <PropertyRef Name="fCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMerchandise_tCategory1">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="0..1" />
+          <End Role="tMerchandise" Type="Self.tMerchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCategory">
+              <PropertyRef Name="fCategoryID" />
+            </Principal>
+            <Dependent Role="tMerchandise">
+              <PropertyRef Name="fMerchandiseCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLevel_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerLevel" Type="Self.tCustomerLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerLevel">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerLike_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerLike" Type="Self.tCustomerLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerLike">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerService_tProblem">
+          <End Role="tProblem" Type="Self.tProblem" Multiplicity="0..1" />
+          <End Role="tCustomerService" Type="Self.tCustomerService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProblem">
+              <PropertyRef Name="fProblemId" />
+            </Principal>
+            <Dependent Role="tCustomerService">
+              <PropertyRef Name="fProblemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomerWatchList_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="0..1" />
+          <End Role="tCustomerWatchList" Type="Self.tCustomerWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tCustomerWatchList">
+              <PropertyRef Name="fProductBarcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t關注清單_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
+          <End Role="tCustomerWatchList" Type="Self.tCustomerWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tCustomerWatchList">
+              <PropertyRef Name="fCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartments">
+          <End Role="tDepartments" Type="Self.tDepartments" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartments">
+              <PropertyRef Name="fDepartmentId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDiscount_tEvent">
+          <End Role="tEvent" Type="Self.tEvent" Multiplicity="1" />
+          <End Role="tDiscount" Type="Self.tDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEvent">
+              <PropertyRef Name="fEventID" />
+            </Principal>
+            <Dependent Role="tDiscount">
+              <PropertyRef Name="fEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCard_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tCard" Type="Self.tCard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tCard">
+              <PropertyRef Name="fEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tPosition">
+          <End Role="tPosition" Type="Self.tPosition" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPosition">
+              <PropertyRef Name="fPositionId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fPositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseReports_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tExpenseReports">
+              <PropertyRef Name="fEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseReports_tEmployee1">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeId" />
+            </Principal>
+            <Dependent Role="tExpenseReports">
+              <PropertyRef Name="fApproverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseItems_tExpenseCategories">
+          <End Role="tExpenseCategories" Type="Self.tExpenseCategories" Multiplicity="1" />
+          <End Role="tExpenseItems" Type="Self.tExpenseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tExpenseCategories">
+              <PropertyRef Name="fCategoryId" />
+            </Principal>
+            <Dependent Role="tExpenseItems">
+              <PropertyRef Name="fCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tExpenseItems_tExpenseReports">
+          <End Role="tExpenseReports" Type="Self.tExpenseReports" Multiplicity="1" />
+          <End Role="tExpenseItems" Type="Self.tExpenseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tExpenseReports">
+              <PropertyRef Name="fReportId" />
+            </Principal>
+            <Dependent Role="tExpenseItems">
+              <PropertyRef Name="fReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tFundrasingPlan_tFundrasing">
+          <End Role="tFundrasing" Type="Self.tFundrasing" Multiplicity="1" />
+          <End Role="tFundrasingPlan" Type="Self.tFundrasingPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFundrasing">
+              <PropertyRef Name="fFundrasingID" />
+            </Principal>
+            <Dependent Role="tFundrasingPlan">
+              <PropertyRef Name="fFundrasingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tMember">
+          <End Role="tMember" Type="Self.tMember" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMember">
+              <PropertyRef Name="fMemberId" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMerchandise_tProducts">
+          <End Role="tProducts" Type="Self.tProducts" Multiplicity="1" />
+          <End Role="tMerchandise" Type="Self.tMerchandise" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProducts">
+              <PropertyRef Name="fProductBarcode" />
+            </Principal>
+            <Dependent Role="tMerchandise">
+              <PropertyRef Name="fMerchandiseBarcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tBookCatagory">
+          <End Role="tBook" Type="Self.tBook" Multiplicity="*" />
+          <End Role="tCatagory" Type="Self.tCatagory" Multiplicity="*" />
+        </Association>
+        <Association Name="tCategoryDiscount">
+          <End Role="tCategory" Type="Self.tCategory" Multiplicity="*" />
+          <End Role="tDiscount" Type="Self.tDiscount" Multiplicity="*" />
+        </Association>
+        <Association Name="tMemberFundrasingPlan">
+          <End Role="tFundrasingPlan" Type="Self.tFundrasingPlan" Multiplicity="*" />
+          <End Role="tMember" Type="Self.tMember" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbPlusNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tAuthor" EntityType="Self.tAuthor" />
+          <EntitySet Name="tBook" EntityType="Self.tBook" />
+          <EntitySet Name="tCatagory" EntityType="Self.tCatagory" />
+          <EntitySet Name="tCategory" EntityType="Self.tCategory" />
+          <EntitySet Name="tCompany" EntityType="Self.tCompany" />
+          <EntitySet Name="tCustomerLevel" EntityType="Self.tCustomerLevel" />
+          <EntitySet Name="tCustomerLike" EntityType="Self.tCustomerLike" />
+          <EntitySet Name="tCustomerService" EntityType="Self.tCustomerService" />
+          <EntitySet Name="tCustomerWatchList" EntityType="Self.tCustomerWatchList" />
+          <EntitySet Name="tDepartments" EntityType="Self.tDepartments" />
+          <EntitySet Name="tDiscount" EntityType="Self.tDiscount" />
+          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" />
+          <EntitySet Name="tEvent" EntityType="Self.tEvent" />
+          <EntitySet Name="tExpenseCategories" EntityType="Self.tExpenseCategories" />
+          <EntitySet Name="tExpenseItems" EntityType="Self.tExpenseItems" />
+          <EntitySet Name="tExpenseReports" EntityType="Self.tExpenseReports" />
+          <EntitySet Name="tFundrasing" EntityType="Self.tFundrasing" />
+          <EntitySet Name="tFundrasingPlan" EntityType="Self.tFundrasingPlan" />
+          <EntitySet Name="tMember" EntityType="Self.tMember" />
+          <EntitySet Name="tMerchandise" EntityType="Self.tMerchandise" />
+          <EntitySet Name="tOrders" EntityType="Self.tOrders" />
+          <EntitySet Name="tPosition" EntityType="Self.tPosition" />
+          <EntitySet Name="tProblem" EntityType="Self.tProblem" />
+          <EntitySet Name="tProducts" EntityType="Self.tProducts" />
+          <EntitySet Name="tCard" EntityType="Self.tCard" />
+          <AssociationSet Name="FK_tBook_tCategory" Association="Self.FK_tBook_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tBook" EntitySet="tBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBook_tProducts" Association="Self.FK_tBook_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tBook" EntitySet="tBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLike_tCategory" Association="Self.FK_tCustomerLike_tCategory">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tCustomerLike" EntitySet="tCustomerLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMerchandise_tCategory1" Association="Self.FK_tMerchandise_tCategory1">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tMerchandise" EntitySet="tMerchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLevel_tMember" Association="Self.FK_tCustomerLevel_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerLevel" EntitySet="tCustomerLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerLike_tMember" Association="Self.FK_tCustomerLike_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerLike" EntitySet="tCustomerLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tEmployee" Association="Self.FK_tCustomerService_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tMember" Association="Self.FK_tCustomerService_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerService_tProblem" Association="Self.FK_tCustomerService_tProblem">
+            <End Role="tProblem" EntitySet="tProblem" />
+            <End Role="tCustomerService" EntitySet="tCustomerService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomerWatchList_tProducts" Association="Self.FK_tCustomerWatchList_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tCustomerWatchList" EntitySet="tCustomerWatchList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t關注清單_tMember" Association="Self.FK_t關注清單_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tCustomerWatchList" EntitySet="tCustomerWatchList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartments" Association="Self.FK_tEmployee_tDepartments">
+            <End Role="tDepartments" EntitySet="tDepartments" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDiscount_tEvent" Association="Self.FK_tDiscount_tEvent">
+            <End Role="tEvent" EntitySet="tEvent" />
+            <End Role="tDiscount" EntitySet="tDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCard_tEmployee" Association="Self.FK_tCard_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCard" EntitySet="tCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tPosition" Association="Self.FK_tEmployee_tPosition">
+            <End Role="tPosition" EntitySet="tPosition" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseReports_tEmployee" Association="Self.FK_tExpenseReports_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseReports_tEmployee1" Association="Self.FK_tExpenseReports_tEmployee1">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseItems_tExpenseCategories" Association="Self.FK_tExpenseItems_tExpenseCategories">
+            <End Role="tExpenseCategories" EntitySet="tExpenseCategories" />
+            <End Role="tExpenseItems" EntitySet="tExpenseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tExpenseItems_tExpenseReports" Association="Self.FK_tExpenseItems_tExpenseReports">
+            <End Role="tExpenseReports" EntitySet="tExpenseReports" />
+            <End Role="tExpenseItems" EntitySet="tExpenseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tFundrasingPlan_tFundrasing" Association="Self.FK_tFundrasingPlan_tFundrasing">
+            <End Role="tFundrasing" EntitySet="tFundrasing" />
+            <End Role="tFundrasingPlan" EntitySet="tFundrasingPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tMember" Association="Self.FK_tOrders_tMember">
+            <End Role="tMember" EntitySet="tMember" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMerchandise_tProducts" Association="Self.FK_tMerchandise_tProducts">
+            <End Role="tProducts" EntitySet="tProducts" />
+            <End Role="tMerchandise" EntitySet="tMerchandise" />
+          </AssociationSet>
+          <AssociationSet Name="tBookCatagory" Association="Self.tBookCatagory">
+            <End Role="tBook" EntitySet="tBook" />
+            <End Role="tCatagory" EntitySet="tCatagory" />
+          </AssociationSet>
+          <AssociationSet Name="tCategoryDiscount" Association="Self.tCategoryDiscount">
+            <End Role="tCategory" EntitySet="tCategory" />
+            <End Role="tDiscount" EntitySet="tDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="tMemberFundrasingPlan" Association="Self.tMemberFundrasingPlan">
+            <End Role="tFundrasingPlan" EntitySet="tFundrasingPlan" />
+            <End Role="tMember" EntitySet="tMember" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbPlusNModelStoreContainer" CdmEntityContainer="dbPlusNEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbPlusNModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAuthor">
+            <EntityTypeMapping TypeName="dbPlusNModel.tAuthor">
+              <MappingFragment StoreEntitySet="tAuthor">
+                <ScalarProperty Name="fAuthorID" ColumnName="fAuthorID" />
+                <ScalarProperty Name="fAuthorName" ColumnName="fAuthorName" />
+                <ScalarProperty Name="fAuthorPhone" ColumnName="fAuthorPhone" />
+                <ScalarProperty Name="fAuthorEmail" ColumnName="fAuthorEmail" />
+                <ScalarProperty Name="fAuthorAddress" ColumnName="fAuthorAddress" />
+                <ScalarProperty Name="fAuthorGender" ColumnName="fAuthorGender" />
+                <ScalarProperty Name="fAuthorNationality" ColumnName="fAuthorNationality" />
+                <ScalarProperty Name="fAuthorImagePath" ColumnName="fAuthorImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tBook">
+            <EntityTypeMapping TypeName="dbPlusNModel.tBook">
+              <MappingFragment StoreEntitySet="tBook">
+                <ScalarProperty Name="fIsbn" ColumnName="fIsbn" />
+                <ScalarProperty Name="fTitle" ColumnName="fTitle" />
+                <ScalarProperty Name="fLanguage" ColumnName="fLanguage" />
+                <ScalarProperty Name="fPublisher" ColumnName="fPublisher" />
+                <ScalarProperty Name="fPublishDate" ColumnName="fPublishDate" />
+                <ScalarProperty Name="fEdition" ColumnName="fEdition" />
+                <ScalarProperty Name="fPublishRegion" ColumnName="fPublishRegion" />
+                <ScalarProperty Name="fCover" ColumnName="fCover" />
+                <ScalarProperty Name="fPage" ColumnName="fPage" />
+                <ScalarProperty Name="fBookImagePath" ColumnName="fBookImagePath" />
+                <ScalarProperty Name="fBookRating" ColumnName="fBookRating" />
+                <ScalarProperty Name="fLevel" ColumnName="fLevel" />
+                <ScalarProperty Name="fType" ColumnName="fType" />
+                <ScalarProperty Name="fBookCategoryId" ColumnName="fBookCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCatagory">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCatagory">
+              <MappingFragment StoreEntitySet="tCatagory">
+                <ScalarProperty Name="fBookCatagoryId" ColumnName="fBookCatagoryId" />
+                <ScalarProperty Name="fCatagory" ColumnName="fCatagory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCategory">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCategory">
+              <MappingFragment StoreEntitySet="tCategory">
+                <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+                <ScalarProperty Name="fCategoryName" ColumnName="fCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCompany">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCompany">
+              <MappingFragment StoreEntitySet="tCompany">
+                <ScalarProperty Name="fCompanyId" ColumnName="fCompanyId" />
+                <ScalarProperty Name="fCompanyName" ColumnName="fCompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomerLevel">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCustomerLevel">
+              <MappingFragment StoreEntitySet="tCustomerLevel">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fCustomerId" ColumnName="fCustomerId" />
+                <ScalarProperty Name="fTotalSpending" ColumnName="fTotalSpending" />
+                <ScalarProperty Name="fCustomerLevel" ColumnName="fCustomerLevel" />
+                <ScalarProperty Name="fDiscount" ColumnName="fDiscount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomerLike">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCustomerLike">
+              <MappingFragment StoreEntitySet="tCustomerLike">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fCustomerId" ColumnName="fCustomerId" />
+                <ScalarProperty Name="fCategoryId" ColumnName="fCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomerService">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCustomerService">
+              <MappingFragment StoreEntitySet="tCustomerService">
+                <ScalarProperty Name="tCustomerServiceID" ColumnName="tCustomerServiceID" />
+                <ScalarProperty Name="fDate" ColumnName="fDate" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fProblemId" ColumnName="fProblemId" />
+                <ScalarProperty Name="fType" ColumnName="fType" />
+                <ScalarProperty Name="fContent" ColumnName="fContent" />
+                <ScalarProperty Name="fParentId" ColumnName="fParentId" />
+                <ScalarProperty Name="fMemberID" ColumnName="fMemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomerWatchList">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCustomerWatchList">
+              <MappingFragment StoreEntitySet="tCustomerWatchList">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fCustomerId" ColumnName="fCustomerId" />
+                <ScalarProperty Name="fProductBarcode" ColumnName="fProductBarcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDepartments">
+            <EntityTypeMapping TypeName="dbPlusNModel.tDepartments">
+              <MappingFragment StoreEntitySet="tDepartments">
+                <ScalarProperty Name="fDepartmentId" ColumnName="fDepartmentId" />
+                <ScalarProperty Name="fDepartmentName" ColumnName="fDepartmentName" />
+                <ScalarProperty Name="fManagerId" ColumnName="fManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDiscount">
+            <EntityTypeMapping TypeName="dbPlusNModel.tDiscount">
+              <MappingFragment StoreEntitySet="tDiscount">
+                <ScalarProperty Name="fDiscountID" ColumnName="fDiscountID" />
+                <ScalarProperty Name="fDiscountName" ColumnName="fDiscountName" />
+                <ScalarProperty Name="fDiscountPercentage" ColumnName="fDiscountPercentage" />
+                <ScalarProperty Name="fEventID" ColumnName="fEventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmployee">
+            <EntityTypeMapping TypeName="dbPlusNModel.tEmployee">
+              <MappingFragment StoreEntitySet="tEmployee">
+                <ScalarProperty Name="fEmployeeId" ColumnName="fEmployeeId" />
+                <ScalarProperty Name="fEmployeeName" ColumnName="fEmployeeName" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fPassword" ColumnName="fPassword" />
+                <ScalarProperty Name="fDepartmentId" ColumnName="fDepartmentId" />
+                <ScalarProperty Name="fPositionId" ColumnName="fPositionId" />
+                <ScalarProperty Name="fWage" ColumnName="fWage" />
+                <ScalarProperty Name="fImagePath" ColumnName="fImagePath" />
+                <ScalarProperty Name="fEnable" ColumnName="fEnable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEvent">
+            <EntityTypeMapping TypeName="dbPlusNModel.tEvent">
+              <MappingFragment StoreEntitySet="tEvent">
+                <ScalarProperty Name="fEventID" ColumnName="fEventID" />
+                <ScalarProperty Name="fEventName" ColumnName="fEventName" />
+                <ScalarProperty Name="fEventDescription" ColumnName="fEventDescription" />
+                <ScalarProperty Name="fEventType" ColumnName="fEventType" />
+                <ScalarProperty Name="fStratdate" ColumnName="fStratdate" />
+                <ScalarProperty Name="fEnddate" ColumnName="fEnddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tExpenseCategories">
+            <EntityTypeMapping TypeName="dbPlusNModel.tExpenseCategories">
+              <MappingFragment StoreEntitySet="tExpenseCategories">
+                <ScalarProperty Name="fCategoryId" ColumnName="fCategoryId" />
+                <ScalarProperty Name="fCategoryName" ColumnName="fCategoryName" />
+                <ScalarProperty Name="fDescription" ColumnName="fDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tExpenseItems">
+            <EntityTypeMapping TypeName="dbPlusNModel.tExpenseItems">
+              <MappingFragment StoreEntitySet="tExpenseItems">
+                <ScalarProperty Name="fReportItemId" ColumnName="fReportItemId" />
+                <ScalarProperty Name="fReportId" ColumnName="fReportId" />
+                <ScalarProperty Name="fCategoryId" ColumnName="fCategoryId" />
+                <ScalarProperty Name="fReportItemName" ColumnName="fReportItemName" />
+                <ScalarProperty Name="fQty" ColumnName="fQty" />
+                <ScalarProperty Name="fAmount" ColumnName="fAmount" />
+                <ScalarProperty Name="fAmountDescription" ColumnName="fAmountDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tExpenseReports">
+            <EntityTypeMapping TypeName="dbPlusNModel.tExpenseReports">
+              <MappingFragment StoreEntitySet="tExpenseReports">
+                <ScalarProperty Name="fReportId" ColumnName="fReportId" />
+                <ScalarProperty Name="fEmployeeId" ColumnName="fEmployeeId" />
+                <ScalarProperty Name="fDate" ColumnName="fDate" />
+                <ScalarProperty Name="fStatus" ColumnName="fStatus" />
+                <ScalarProperty Name="fApproverId" ColumnName="fApproverId" />
+                <ScalarProperty Name="fApprovalDate" ColumnName="fApprovalDate" />
+                <ScalarProperty Name="fTotal" ColumnName="fTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFundrasing">
+            <EntityTypeMapping TypeName="dbPlusNModel.tFundrasing">
+              <MappingFragment StoreEntitySet="tFundrasing">
+                <ScalarProperty Name="fFundrasingID" ColumnName="fFundrasingID" />
+                <ScalarProperty Name="fEventName" ColumnName="fEventName" />
+                <ScalarProperty Name="fFundrasingGoal" ColumnName="fFundrasingGoal" />
+                <ScalarProperty Name="fCurrentAmount" ColumnName="fCurrentAmount" />
+                <ScalarProperty Name="fFundraisingDescription" ColumnName="fFundraisingDescription" />
+                <ScalarProperty Name="fStartdate" ColumnName="fStartdate" />
+                <ScalarProperty Name="fEnddate" ColumnName="fEnddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFundrasingPlan">
+            <EntityTypeMapping TypeName="dbPlusNModel.tFundrasingPlan">
+              <MappingFragment StoreEntitySet="tFundrasingPlan">
+                <ScalarProperty Name="fPlanID" ColumnName="fPlanID" />
+                <ScalarProperty Name="fPlanName" ColumnName="fPlanName" />
+                <ScalarProperty Name="fPlanAmount" ColumnName="fPlanAmount" />
+                <ScalarProperty Name="fPlanDescription" ColumnName="fPlanDescription" />
+                <ScalarProperty Name="fFundrasingID" ColumnName="fFundrasingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMember">
+            <EntityTypeMapping TypeName="dbPlusNModel.tMember">
+              <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="fMemberId" ColumnName="fMemberId" />
+                <ScalarProperty Name="fPassword" ColumnName="fPassword" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fBirthday" ColumnName="fBirthday" />
+                <ScalarProperty Name="fCountry" ColumnName="fCountry" />
+                <ScalarProperty Name="fSex" ColumnName="fSex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMerchandise">
+            <EntityTypeMapping TypeName="dbPlusNModel.tMerchandise">
+              <MappingFragment StoreEntitySet="tMerchandise">
+                <ScalarProperty Name="fMerchandiseBarcode" ColumnName="fMerchandiseBarcode" />
+                <ScalarProperty Name="fMerchandiseName" ColumnName="fMerchandiseName" />
+                <ScalarProperty Name="fMerchandisePath" ColumnName="fMerchandisePath" />
+                <ScalarProperty Name="fMerchandiseRating" ColumnName="fMerchandiseRating" />
+                <ScalarProperty Name="fMerchandiseCategoryId" ColumnName="fMerchandiseCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrders">
+            <EntityTypeMapping TypeName="dbPlusNModel.tOrders">
+              <MappingFragment StoreEntitySet="tOrders">
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fMemberID" ColumnName="fMemberID" />
+                <ScalarProperty Name="fOrderDate" ColumnName="fOrderDate" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fTransferID" ColumnName="fTransferID" />
+                <ScalarProperty Name="fOrderStatus" ColumnName="fOrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPosition">
+            <EntityTypeMapping TypeName="dbPlusNModel.tPosition">
+              <MappingFragment StoreEntitySet="tPosition">
+                <ScalarProperty Name="fPositionId" ColumnName="fPositionId" />
+                <ScalarProperty Name="fPositionName" ColumnName="fPositionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProblem">
+            <EntityTypeMapping TypeName="dbPlusNModel.tProblem">
+              <MappingFragment StoreEntitySet="tProblem">
+                <ScalarProperty Name="fProblemId" ColumnName="fProblemId" />
+                <ScalarProperty Name="fProblem" ColumnName="fProblem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProducts">
+            <EntityTypeMapping TypeName="dbPlusNModel.tProducts">
+              <MappingFragment StoreEntitySet="tProducts">
+                <ScalarProperty Name="fProductId" ColumnName="fProductId" />
+                <ScalarProperty Name="fProductBarcode" ColumnName="fProductBarcode" />
+                <ScalarProperty Name="fProductCategory" ColumnName="fProductCategory" />
+                <ScalarProperty Name="fProductName" ColumnName="fProductName" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+                <ScalarProperty Name="fCost" ColumnName="fCost" />
+                <ScalarProperty Name="fQuantity" ColumnName="fQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCard">
+            <EntityTypeMapping TypeName="dbPlusNModel.tCard">
+              <MappingFragment StoreEntitySet="tCard">
+                <ScalarProperty Name="fEmployeeId" ColumnName="fEmployeeId" />
+                <ScalarProperty Name="fStart" ColumnName="fStart" />
+                <ScalarProperty Name="fOff" ColumnName="fOff" />
+                <ScalarProperty Name="fWorktime" ColumnName="fWorktime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tBookCatagory" TypeName="dbPlusNModel.tBookCatagory" StoreEntitySet="tBookCatagory">
+            <EndProperty Name="tBook">
+              <ScalarProperty Name="fIsbn" ColumnName="fIsbn" />
+            </EndProperty>
+            <EndProperty Name="tCatagory">
+              <ScalarProperty Name="fBookCatagoryId" ColumnName="fBookCatagoryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tCategoryDiscount" TypeName="dbPlusNModel.tCategoryDiscount" StoreEntitySet="tCategoryDiscount">
+            <EndProperty Name="tCategory">
+              <ScalarProperty Name="fCategoryID" ColumnName="fCategoryID" />
+            </EndProperty>
+            <EndProperty Name="tDiscount">
+              <ScalarProperty Name="fDiscountID" ColumnName="fDiscountID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tMemberFundrasingPlan" TypeName="dbPlusNModel.tMemberFundrasingPlan" StoreEntitySet="tMemberFundrasingPlan">
+            <EndProperty Name="tFundrasingPlan">
+              <ScalarProperty Name="fPlanID" ColumnName="fPlanID" />
+            </EndProperty>
+            <EndProperty Name="tMember">
+              <ScalarProperty Name="fMemberId" ColumnName="fMemberID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

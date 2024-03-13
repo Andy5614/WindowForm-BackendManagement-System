@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC99094E-9EE4-4EE9-87C7-0D992649209F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>prjBookStore</RootNamespace>
+    <AssemblyName>prjBookStore</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="RJCodeAdvance.RJControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RJCodeAdvance.RJControls.1.0.0\lib\net45\RJCodeAdvance.RJControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CS.cs" />
+    <Compile Include="dbPlusN.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbPlusN.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbPlusN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbPlusN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbPlusN.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FDiscountEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FDiscountEditor.Designer.cs">
+      <DependentUpon>FDiscountEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEventAndDiscountEditorcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEventAndDiscountEditorcs.Designer.cs">
+      <DependentUpon>FEventAndDiscountEditorcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEventEditorcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEventEditorcs.Designer.cs">
+      <DependentUpon>FEventEditorcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FFundrasingAndPlanEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FFundrasingAndPlanEditor.Designer.cs">
+      <DependentUpon>FFundrasingAndPlanEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FFundrasingAndPlanADD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FFundrasingAndPlanADD.Designer.cs">
+      <DependentUpon>FFundrasingAndPlanADD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FFundrasingPlanEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FFundrasingPlanEditor.Designer.cs">
+      <DependentUpon>FFundrasingPlanEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FEventcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FEventcs.Designer.cs">
+      <DependentUpon>FEventcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FFundrasingcsMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FFundrasingcsMain.Designer.cs">
+      <DependentUpon>FFundrasingcsMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\colum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\colum.Designer.cs">
+      <DependentUpon>colum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IsNumber.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\ViewRefresh.cs" />
+    <Compile Include="RJcs.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAuthor.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tBook.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCard.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCatagory.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCategory.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCompany.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCustomerLevel.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCustomerLike.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCustomerService.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCustomerWatchList.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tDepartments.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tDiscount.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tEmployee.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tEvent.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tExpenseCategories.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tExpenseItems.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tExpenseReports.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tFundrasing.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tFundrasingPlan.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMember.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMerchandise.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tOrders.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tPosition.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tProblem.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tProducts.cs">
+      <DependentUpon>dbPlusN.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FDiscountEditor.resx">
+      <DependentUpon>FDiscountEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEventAndDiscountEditorcs.resx">
+      <DependentUpon>FEventAndDiscountEditorcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEventcs.resx">
+      <DependentUpon>FEventcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FEventEditorcs.resx">
+      <DependentUpon>FEventEditorcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FFundrasingcsMain.resx">
+      <DependentUpon>FFundrasingcsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FFundrasingAndPlanEditor.resx">
+      <DependentUpon>FFundrasingAndPlanEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FFundrasingAndPlanADD.resx">
+      <DependentUpon>FFundrasingAndPlanADD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FFundrasingPlanEditor.resx">
+      <DependentUpon>FFundrasingPlanEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\colum.resx">
+      <DependentUpon>colum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EntityDeploy Include="dbPlusN.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbPlusN.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="dbPlusN.edmx.diagram">
+      <DependentUpon>dbPlusN.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dbPlusN.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbPlusN.edmx</DependentUpon>
+      <LastGenOutput>dbPlusN.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="dbPlusN.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbPlusN.edmx</DependentUpon>
+      <LastGenOutput>dbPlusN.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
