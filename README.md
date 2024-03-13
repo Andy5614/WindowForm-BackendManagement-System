@@ -1,1 +1,1 @@
-# prjBookStore - 複製
+# WindowForm-BackendManagement-System
